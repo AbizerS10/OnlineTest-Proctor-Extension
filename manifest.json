@@ -1,0 +1,34 @@
+{
+    "name": "My Procotor",
+    "version": "0.1.0",
+    "description": "To proctor online assessments and prevent cheating",
+    "permissions": ["storage", "tabs", "fullscreen"],
+    "host_permissions": ["https://*.elitmus.com/*"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://*.elitmus.com/*"],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "assets/logo.png"
+        ],
+        "matches": ["https://*.elitmus.com/*"]
+      }
+    ],
+    "action": {
+      "default_icon": {
+        "16": "assets/logo.png",
+        "24": "assets/logo.png",
+        "32": "assets/logo.png"
+      },
+      "default_title": "My Proctor",
+      "default_popup": "popup.html"
+    },
+    "manifest_version": 3
+}
