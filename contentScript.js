@@ -3,8 +3,12 @@
     const { type, tabLength } = obj;
     if (type.indexOf("test") !== -1) {
       if (tabLength > 1) alert("close other tabs");
-      if(window.innerHeight !== screen.height && window.innerWidth !== screen.width){
-        // fullscreen code
+
+      if (
+        window.innerHeight !== screen.height &&
+        window.innerWidth !== screen.width
+      ) {
+        // asusual
       }
     }
   });
@@ -108,3 +112,9 @@
 
   mediaDevicesAvailable();
 })();
+
+document.documentElement.addEventListener("click", (el) => {
+  document.documentElement.requestFullscreen().catch((err) => {
+    console.log(err);
+  });
+});
