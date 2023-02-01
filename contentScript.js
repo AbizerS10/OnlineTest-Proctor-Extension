@@ -96,42 +96,51 @@
     return `We can not use your ${device}. Please grant permission to your ${device}.`;
   }
 
+  mediaDevicesAvailable();
+})();
+
+if (
+  window.location.href.indexOf("test") > -1 ||
+  window.location.href.indexOf("assessment") > -1
+) {
   document.addEventListener("visibilitychange", (e) => {
     if (
       document.visibilityState === "hidden" &&
       (window.location.href.indexOf("test") > -1 ||
         window.location.href.indexOf("assessment") > -1)
     ) {
-      e.preventDefault();
       alert("Warning! Don't switch tabs");
     }
     return true;
   });
-  document.addEventListener("keydown", (e) => {
+
+  document.addEventListener("fullscreenchange", (e) => {
+    if (!document.fullscreenElement)
+      alert(
+        "Warning! Can't exit full screen, click the screen to allow full screen mode"
+      );
+  });
+
+  document.documentElement.addEventListener("keydown", (e) => {
+    e.preventDefault();
     if (
-      (window.location.href.indexOf("test") > -1 ||
-        window.location.href.indexOf("assessment") > -1) &&
-      (e.key == "Escape" || e.ctrlKey || e.metaKey || e.altKey || e.shiftKey)
+      e.key === "Escape" ||
+      e.ctrlKey ||
+      e.metaKey ||
+      e.altKey ||
+      e.shiftKey
     ) {
       alert("Can't use esc/ctrl/shift/alt/meta keys");
-      e.preventDefault();
       return false;
     }
     return true;
   });
 
-  mediaDevicesAvailable();
-})();
-
-document.documentElement.addEventListener("click", (el) => {
-  if (
-    window.location.href.indexOf("test") > -1 ||
-    window.location.href.indexOf("assessment") > -1
-  ) {
+  document.documentElement.addEventListener("click", (el) => {
     document.documentElement
       .requestFullscreen({ navigationUI: "hide" })
       .catch((err) => {
         console.log(err);
       });
-  }
-});
+  });
+}
