@@ -2,7 +2,7 @@
     "name": "My Procotor",
     "version": "0.1.0",
     "description": "To proctor online assessments and prevent cheating",
-    "permissions": ["storage", "tabs", "fullscreen"],
+    "permissions": ["storage", "tabs", "fullscreen", "webRequest", "webRequestAuthProvider"],
     "host_permissions": ["https://*.elitmus.com/*"],
     "background": {
       "service_worker": "background.js"

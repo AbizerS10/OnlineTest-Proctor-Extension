@@ -13,7 +13,7 @@
     <div class="details">
         <p>No of Opened Tabs = <span id="tabs_count"></span></p>
         <p>Is Full Screened = <span id="full_screen">false</span></p>
-        <p>Internet Speed = <span id="speed"></span></p>
+        <p>Internet State = <span id="speed"></span></p>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -21,6 +21,8 @@
             chrome.tabs.query({ pinned: false }, function (tabs) {
                 document.getElementById("tabs_count").innerHTML = tabs.length;
             });
+
+            document.getElementById("speed").innerHTML = navigator.onLine ? "Online" : "Offline";
 
             if (window.screenTop === 0 || window.screenY === 0) {
                 document.getElementById("full_screen").innerHTML = "true";

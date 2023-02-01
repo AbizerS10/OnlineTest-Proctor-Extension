@@ -1,15 +1,9 @@
 (() => {
   chrome.runtime.onMessage.addListener((obj, sender, response) => {
-    const { type, tabLength } = obj;
-    if (type.indexOf("test") !== -1) {
+    const { type, tabLength, ip } = obj;
+    localStorage.setItem("User IP address", ip);
+    if (type.indexOf("test") !== -1 || type.indexOf("assessment") !== -1) {
       if (tabLength > 1) alert("close other tabs");
-
-      if (
-        window.innerHeight !== screen.height &&
-        window.innerWidth !== screen.width
-      ) {
-        // asusual
-      }
     }
   });
 
@@ -59,6 +53,20 @@
           audioAccess: audioAccess,
           videoAccess: videoAccess,
         });
+        localStorage.setItem("User has mic", hasAudio);
+        localStorage.setItem("User has camera", hasVideo);
+        localStorage.setItem(
+          "Site has audio access",
+          audioAccess ? audioAccess.active : false
+        );
+        localStorage.setItem(
+          "Site has video access",
+          videoAccess ? videoAccess.active : false
+        );
+        localStorage.setItem(
+          "Internet State",
+          navigator.onLine ? "Online" : "Offline"
+        );
       } else {
         reject({ error: "The media devices could not be checked" });
       }
@@ -88,13 +96,14 @@
     return `We can not use your ${device}. Please grant permission to your ${device}.`;
   }
 
-  document.addEventListener("focusout", (e) => {
+  document.addEventListener("visibilitychange", (e) => {
     if (
-      window.location.href.indexOf("test") > -1 ||
-      window.location.href.indexOf("assessment") > -1
+      document.visibilityState === "hidden" &&
+      (window.location.href.indexOf("test") > -1 ||
+        window.location.href.indexOf("assessment") > -1)
     ) {
       e.preventDefault();
-      alert("Don't switch tabs");
+      alert("Warning! Don't switch tabs");
     }
     return true;
   });
@@ -104,6 +113,7 @@
         window.location.href.indexOf("assessment") > -1) &&
       (e.key == "Escape" || e.ctrlKey || e.metaKey || e.altKey || e.shiftKey)
     ) {
+      alert("Can't use esc/ctrl/shift/alt/meta keys");
       e.preventDefault();
       return false;
     }
@@ -114,7 +124,14 @@
 })();
 
 document.documentElement.addEventListener("click", (el) => {
-  document.documentElement.requestFullscreen().catch((err) => {
-    console.log(err);
-  });
+  if (
+    window.location.href.indexOf("test") > -1 ||
+    window.location.href.indexOf("assessment") > -1
+  ) {
+    document.documentElement
+      .requestFullscreen({ navigationUI: "hide" })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 });
