@@ -24,3 +24,5 @@
    c. Internet Stability
  7. Captures the user related information in local storage.(e.g. IP, requirements
 check)
+
+# If the extension doesn't show the listed behavior then please reload the extension from the browser's extension settings
