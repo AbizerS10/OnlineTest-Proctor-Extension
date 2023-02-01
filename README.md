@@ -25,4 +25,4 @@
  7. Captures the user related information in local storage.(e.g. IP, requirements
 check)
 
-Note: If the extension doesn't show the listed behavior then please reload the extension from the browser's extension settings
+Note: If the extension doesn't show the listed behavior then kindly reload the extension from the browser's extension settings
