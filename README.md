@@ -12,7 +12,7 @@
  1. Go to https://reception.pac.elitmus.com/ (camera, mic and internet check)
  2. Then, go to https://reception.pac.elitmus.com/test (camera, mic, internet, tabs, tab switch, full screen, keyboard shortcuts check).
 
-# Features Implemented (Tried)
+# Features Implemented (Tried 1st time)
  1. Extension works only in https://*.elitmus.com/[test,assessment] websites.
  2. The browser opens in full screen mode on click on test website.
  3. Pop up is shown when someone switches between 2 tabs or Application.
