@@ -1,4 +1,4 @@
-# OnlineTest-Proctor-Extension
+# OnlineTest-Proctor-Extension (My first chrome extension)
 
 
 # Steps to install the extension:
